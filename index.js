@@ -41,7 +41,7 @@ async function getQuoteToFlowPriceFromDex(pairAddr) {
     numFlow = parseFloat(info[3])
     numQuote = parseFloat(info[2])
   } else {
-    throw(`not pair with flow`)
+    throw(`not paired with flow`)
   }
   // 1 quote token = xx flow
   return numFlow / numQuote
