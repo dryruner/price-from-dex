@@ -4,7 +4,8 @@
   "pairs": {
     "flowUsdcPairAddr": "0xfa82796435e15832",
     "myFlowPairAddr": "0x0f280aa19943aa44",
-    "ozoneFlowPairAddr": "0x9a85651eda6a9df4"
+    "sdmUsdcPairAddr": "0x6155398610a02093"
   },
-  "quotePairAddr": "0x0f280aa19943aa44"
+  "quotePairAddr": "0x6155398610a02093",
+  "quotePairBase": "USDC"
 }

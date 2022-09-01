@@ -47,7 +47,26 @@ async function getQuoteToFlowPriceFromDex(pairAddr) {
   return numFlow / numQuote
 }
 
+async function getQuoteToUSDCPriceFromDex(pairAddr) {
+  let info = await getSwapPairInfo(pairAddr)
+  let numUsdc = 0.0
+  let numQuote = 0.0
+  if (info[0].includes('FiatToken')) {
+    numUsdc = parseFloat(info[2])
+    numQuote = parseFloat(info[3])
+  } else if (info[1].includes('FiatToken')) {
+    numUsdc = parseFloat(info[3])
+    numQuote = parseFloat(info[2])
+  } else {
+    throw(`not paired with USDC`)
+  }
+  // 1 quote token = xx usdc
+  return numUsdc / numQuote
+}
+
 async function main() {
+  // Pair xxx-flow
+/*
   // 1 quote = ?? flow
   let priceQuote2Flow = await getQuoteToFlowPriceFromDex(config.quotePairAddr)
   // 1 usdc = ?? flow
@@ -55,7 +74,11 @@ async function main() {
   // 1 quote token = ?? usd, precise to 6 decimals.
   let quote2Usd = (priceQuote2Flow / priceUsdc2Flow).toFixed(6)
 
-  console.log(`Quoted SwapPair: https://app.increment.fi/info/${config.quotePairAddr}, 1 quoted token = $ ${quote2Usd}`)
+  console.log(`Quoted SwapPair: https://app.increment.fi/pair/${config.quotePairAddr}, 1 quoted token = $ ${quote2Usd}`)
+*/
+  // Pair xxx-usdc
+  let priceQuote2Usdc = await getQuoteToUSDCPriceFromDex(config.quotePairAddr)
+  console.log(`Quoted SwapPair: https://app.increment.fi/pair/${config.quotePairAddr}, 1 quoted token = $ ${priceQuote2Usdc}`)
 }
 
 main()
